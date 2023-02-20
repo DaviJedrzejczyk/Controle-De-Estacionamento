@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WEBPresentationLayer.Models.CarroSelectViewModel>
+<div class="container">
+    <h1>Home</h1>
+    
+    <p>
+        <a class="btn btn-primary btn-x2 text-uppercase" asp-area="" asp-controller="Carro" asp-action="InserirEntrada">Registrar nova Entrada</a>
+    </p>
+    <p>
+        <a class="btn btn-primary btn-x2 text-uppercase" asp-area="" asp-controller="Carro" asp-action="Index">Registrar nova Saída</a>
+    </p>
+
+    @using(Html.BeginForm("FilterDate", "Carro", FormMethod.Post)){
+        <span>Data de Entrada</span><input type="date" name="dataEntrada"/>
+        <span>Data de Saída</span><input type="date" name="dataSaida"/>
+        <input type="submit" value="Filtrar"/>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Carro.Placa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Carro.HorarioEntrada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioSaida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TempoFicado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TempoCobrado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Preco)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorPagar)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Carro.Placa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Carro.HorarioEntrada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioSaida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TempoFicado)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TempoCobrado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Preco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorPagar)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

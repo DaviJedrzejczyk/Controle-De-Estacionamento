@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WEBPresentationLayer.Models.FilterDateViewModel>
+
+@{
+    ViewData["Title"] = "Filtrar Datas";
+}
+
+<h1>Datas Filtradas</h1>
+
+<p>
+    <a asp-action="InsertEntrada" asp-controller="Carro">Registrar Nova Entrada</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Placa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioEntrada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HorarioSaida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempoFicado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempoCobrado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorPagar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Placa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorarioEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorarioSaida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempoFicado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempoCobrado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorPagar)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

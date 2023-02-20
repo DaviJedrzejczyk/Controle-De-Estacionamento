@@ -1,0 +1,37 @@
+﻿@model WEBPresentationLayer.Models.CarroListViewModel
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var item1 in Model.Carro)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => item1.Placa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => item1.HorarioEntrada)
+                    </th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Carro)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Placa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HorarioEntrada)
+                    </td>
+                    <td>
+                        <li class="nav-item">
+                            @Html.ActionLink("Registrar Saída", "InserirSaida", new { id=item.ID  }) |
+                        </li>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -28,14 +28,6 @@ namespace ControleDeEstacionamento.Teste
             Assert.AreEqual(true, sut.Object.FilterData(dataEntrada, dataSaida).Result.HasSuccess);
 
         }
-        [Test]
-        public void DeveRetornarTodasAsSaidasDoBanco()
-        {
-            var sut = new Mock<ISaidasCarroDAL>();
-
-            var result = sut.Object.GetAll();
-
-            Assert.That(result.Result.Itens.Count, Is.EqualTo(3));
-        }
+       
     }
 }

@@ -13,6 +13,7 @@ namespace Shared
         {
 
         }
+ 
         public List<T> Itens { get; set; }
     }
 }

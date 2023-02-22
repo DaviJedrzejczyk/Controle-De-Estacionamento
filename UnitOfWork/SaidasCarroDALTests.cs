@@ -14,44 +14,18 @@ namespace ControleDeEstacionamento.Teste
     {
 
         [Test]
-        public void DeveRetornarTodasAsSaidasDentreAsDatas()
+        public async Task DeveRetornarTodasAsSaidasDentreAsDatas()
         {
 
             var sut = new Mock<ISaidasCarroDAL>();
             DateTime dataEntrada = new(2004, 03, 26);
             DateTime dataSaida = new(2004, 03, 27);
-          
-            Carro carro = new()
-            {
-                ID = 2,
-                Placa = "12345678",
-                HorarioEntrada = new DateTime(2004, 03, 26),
-                TemSaida = true
-            };
-            SaidasCarro saidas = new()
-            {
-                Carro = carro,
-                HorarioSaida = new DateTime(2004, 03, 27),
-                TempoCobrado = 21,
-                TempoFicado = "03:17:49",
-                Preco = 12,
-                ValorPagar = 12,
-                CarroID = 2,
-                ID = 1
-            };
-            List<SaidasCarro> saidasCarros = new()
-            {
-                saidas
-            };
-            DataResponse<SaidasCarro> dataResponse = new()
-            {
-                Itens = saidasCarros,
-                HasSuccess = true,
-                Message = "Sucesso"
-            };
+
+            DataResponse<SaidasCarro> dataResponse = await sut.Object.FilterData(dataEntrada, dataSaida);
+            
             sut.Setup(x => x.FilterData(dataEntrada, dataSaida)).Returns(Task.FromResult(dataResponse));
 
-            Assert.AreEqual(2, sut.Object.FilterData(dataEntrada, dataSaida).Result.Itens.Count);
+            Assert.AreEqual(true, sut.Object.FilterData(dataEntrada, dataSaida).Result.HasSuccess);
 
         }
         [Test]

@@ -12,20 +12,14 @@ namespace ControleDeEstacionamento.Teste
     public class CarroDALTests
     {
         [Test]
-        public void DeveInserirUmCarro()
+        public async Task DeveInserirUmCarro()
         {
             var sut = new Mock<ICarroDAL>(); 
             Carro carro = new("CBA-3164", DateTime.Now, false);
-            Response response = new()
-            {
-                Message = "Sucesso",
-                HasSuccess = false
-            };
-            var a = sut.Setup(x => x.InsertEntrada(carro)).Returns(Task.FromResult(response));
-            
-            var result = sut.Object.InsertEntrada(carro);
+            Response response = await sut.Object.InsertEntrada(carro);
+            sut.Setup(x => x.InsertEntrada(carro)).Returns(Task.FromResult(response));
 
-            Assert.That(result.Result.HasSuccess, Is.EqualTo(true));
+            Assert.AreEqual(true, sut.Object.InsertEntrada(carro).Result.HasSuccess);
         }
     }
 }

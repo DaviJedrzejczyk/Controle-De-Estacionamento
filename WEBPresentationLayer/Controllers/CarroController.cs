@@ -85,16 +85,16 @@ namespace WEBPresentationLayer.Controllers
                 return NotFound();
             }
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Search(string? searchString)
         {
             try
             {
-                HttpResponseMessage message = await httpClient.PostAsJsonAsync($"Carro/Search", searchString);
+                HttpResponseMessage message = await httpClient.GetAsync($"Carro/Search?search={searchString}");
                 if (message.IsSuccessStatusCode)
                 {
                     string json = await message.Content.ReadAsStringAsync();
-                    CarroListViewModel carro = JsonConvert.DeserializeObject<CarroListViewModel>(json);
+                    List<CarroListViewModel> carro = JsonConvert.DeserializeObject<List<CarroListViewModel>>(json);
                     if (carro is null)
                     {
                         return NotFound();

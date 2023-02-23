@@ -1,22 +1,19 @@
-﻿@model WEBPresentationLayer.Models.CarroListViewModel
+﻿@model IEnumerable<WEBPresentationLayer.Models.CarroListViewModel>
 <div class="container">
     <table class="table">
         <thead>
             <tr>
-                @foreach (var item1 in Model.Carro)
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => item1.Placa)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => item1.HorarioEntrada)
-                    </th>
-                }
+                <th>
+                    @Html.DisplayNameFor(model => model.Placa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HorarioEntrada)
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Carro)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>

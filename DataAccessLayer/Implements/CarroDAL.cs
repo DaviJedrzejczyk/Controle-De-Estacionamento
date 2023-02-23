@@ -84,7 +84,7 @@ namespace DataAccessLayer.Implements
         {
             try
             {
-                List<Carro> carros = await _db.Carros.Where(c => c.Placa.ToLower().Contains(searchString.ToLower())).ToListAsync();
+                List<Carro> carros = await _db.Carros.Where(c => c.Placa.ToUpper().Contains(searchString.ToUpper())).ToListAsync();
                 List<Carro> carrosSemSaida = new();
                 foreach (var item in carros)
                 {

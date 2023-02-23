@@ -15,6 +15,10 @@ namespace DataAccessLayer
         {
 
         }
+        public EstacionamentoDB()
+        {
+                
+        }
         public DbSet<Carro> Carros { get; set; }
         public DbSet<SaidasCarro> SaidasCarros { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

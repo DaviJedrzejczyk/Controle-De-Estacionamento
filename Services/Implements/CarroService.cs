@@ -60,6 +60,10 @@ namespace Services.Implements
 
         public async Task<DataResponse<Carro>> SearchItem(string searchString)
         {
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                return await _unityOfWork.CarroDAL.GetAllWithoutExits();
+            }
             return await _unityOfWork.CarroDAL.SearchItem(searchString);
         }
     }

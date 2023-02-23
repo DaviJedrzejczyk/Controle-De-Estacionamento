@@ -2,14 +2,15 @@
 <div class="container">
     <h1>Carros No Estacionamento</h1>
     <div class="row">
-        <form asp-controller="Carro" asp-action="Search" >
+        @using(Html.BeginForm("Search", "Carro", FormMethod.Get)){
             <div class="input-group">
-                <input class="form-control" type="text" name="searchString"/>
+                <input class="form-control" type="text" name="searchString" />
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </div>
-        </form>
+        }
+     
     </div>
     <table class="table">
         <thead>

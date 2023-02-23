@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 using Shared;
+using System.Collections.Generic;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -45,6 +46,7 @@ namespace WebApi.Controllers
             Response response = await _carroService.InsertEntrada(carro);
             if (response.HasSuccess)
             {
+
                 return Ok();
             }
             return BadRequest(response.Message);
@@ -71,31 +73,36 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        [HttpPost("Search")]
+        [HttpGet("Search")]
         public async Task<IActionResult> Search(string? searchString)
         {
-            List<Carro> carros;
-            if (string.IsNullOrWhiteSpace(searchString))
+            try
             {
-                DataResponse<Carro> dataResponse = await _carroService.SearchItem(searchString);
-                carros = dataResponse.Itens;
-                List<CarroListViewModel> carroSelectViewModels = _mapper.Map<List<CarroListViewModel>>(carros);
-                return Ok(carroSelectViewModels);
-            }
-            else
-            {
-                DataResponse<Carro> dataResponse = await _carroService.SearchItem(searchString);
-                carros = dataResponse.Itens;
-                List<CarroListViewModel> carroSelectViewModels = _mapper.Map<List<CarroListViewModel>>(carros);
-                if (dataResponse.Itens.Any())
+                if (string.IsNullOrWhiteSpace(searchString))
                 {
-                    return Ok(carroSelectViewModels);
+                    DataResponse<Carro> dataResponse = await _carroService.SearchItem(searchString);
+                    List<CarroListViewModel> carroListViewModels = _mapper.Map<List<CarroListViewModel>>(dataResponse.Itens);
+                    return Ok(carroListViewModels);
                 }
                 else
                 {
-                    return BadRequest();
+                    DataResponse<Carro> dataResponse = await _carroService.SearchItem(searchString);
+                    List<CarroListViewModel> carroListViewModels = _mapper.Map<List<CarroListViewModel>>(dataResponse.Itens);
+                    if (dataResponse.Itens.Any())
+                    {
+                        return Ok(carroListViewModels);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
 
         }
         [HttpPost("Filter-Date")]
